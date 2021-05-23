@@ -28,21 +28,20 @@ const FeedContainer = () => {
     return closestIndex;
   }
 
-  const setActiveSection = () => {
-    const sectionOffsets = sectionRefs.current.map(s => s.offsetTop);
-    const index = closestNumIndex(window.scrollY, sectionOffsets);
-
-    setActiveIndex(index);
-
-    const section = sectionRefs.current[index];
-    console.log('near', section);
-  };
-
   useEffect(() => {
+    const setActiveSection = () => {
+      const sectionOffsets = sectionRefs.current.map(s => s.offsetTop),
+        index = closestNumIndex(window.scrollY, sectionOffsets);
+
+      setActiveIndex(index);
+      // const section = sectionRefs.current[index];
+      // console.log('near', section);
+    };
+
     const scroll = e => {
-      console.log(window.scrollY);
       setActiveSection();
-    }
+    };
+
     window.addEventListener('scroll', scroll);
     return () => {
       window.removeEventListener('scroll', scroll)
@@ -72,7 +71,6 @@ const FeedContainer = () => {
     setCatArr(categories);
   };
 
-
   return (
     <main className='feed-container' >
       <Sidebar categories={catArr} activeIndex={activeIndex} />
@@ -80,8 +78,6 @@ const FeedContainer = () => {
         {catArr.map(({ category, restaurantList }, i) =>
           <RestaurantListContainer ref={r => {
             sectionRefs.current[i] = r;
-
-            return r;
           }} key={category} list={restaurantList} category={category} />
         )}
       </div>

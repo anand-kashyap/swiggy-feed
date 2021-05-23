@@ -10,9 +10,7 @@ const Sidebar = ({ categories, activeIndex }) => {
     <ul className='sidebar'>
       {categories.map(({ category, restaurantList }, i) =>
         <li key={category} onClick={() => scrollToSection(category)} className={activeIndex === i ? 'active' : ''}>
-          <p className='cat-name'>
-            {category}
-          </p>
+          <p className='cat-name'>{category}</p>
           <p className='restaurant-num'>{restaurantList.length} {category.toLowerCase().endsWith('all') ? 'restaurants' : 'options'}</p>
         </li>
       )}

@@ -24,6 +24,12 @@ body,
 header {
   margin: 0 30px;
 }
+header > h1 {
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+}
+
 /* feed  */
 .feed-container {
   margin: 30px;
@@ -43,6 +49,7 @@ header {
   padding-left: 15px;
 }
 
+/* Sidebar start */
 .sidebar {
   position: fixed;
   width: 18%;
@@ -71,6 +78,7 @@ header {
   font-weight: lighter;
   text-transform: uppercase;
 }
+/* Sidebar end */
 
 /* restaurant list */
 .restaurant-list-container {
@@ -78,14 +86,6 @@ header {
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   margin: 20px 0;
-}
-
-.res-card {
-  padding: 20px 15px;
-  padding-bottom: 0;
-}
-.res-card > p {
-  margin-top: 5px;
 }
 
 .load-more > button {
@@ -100,6 +100,20 @@ header {
   cursor: pointer;
 }
 
+/* restaurant card */
+.res-card {
+  padding: 20px 15px;
+  padding-bottom: 0;
+}
+.res-card > p {
+  margin-top: 5px;
+}
+
+.res-card:hover {
+  border-color: #d3d5df;
+  box-shadow: 0 1px 7px 0 rgb(193 193 193);
+}
+
 .res-card > .quick-view {
   visibility: hidden;
   border-top: 1px solid #a5a4a46b;
@@ -110,13 +124,11 @@ header {
   font-size: 0.8rem;
   padding: 15px 0;
 }
+
 .res-card:hover > .quick-view {
   visibility: visible;
 }
-.res-card:hover {
-  border-color: #d3d5df;
-  box-shadow: 0 1px 7px 0 rgb(193 193 193);
-}
+
 .res-stats {
   display: flex;
   margin: 15px 0;
@@ -134,17 +146,6 @@ header {
   font-weight: bold;
 }
 
-.star-icon {
-  font-size: 10px;
-  margin-right: 4px;
-  position: relative;
-  top: -1px;
-}
-
-.star-icon:before {
-  content: '\E938';
-}
-
 .res-rating {
   background-color: #48c479;
   padding: 5px;
@@ -153,6 +154,7 @@ header {
   gap: 5px;
   color: white;
 }
+
 .res-rating.no-rating {
   background-color: white;
   color: initial;
