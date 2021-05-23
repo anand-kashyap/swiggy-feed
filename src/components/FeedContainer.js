@@ -5,7 +5,7 @@ const FeedContainer = () => {
   const [catArr, setCatArr] = useState([]);
 
   useEffect(() => {
-    fetch('http://cdn.adpushup.com/reactTask.json')
+    fetch('https://cdn.adpushup.com/reactTask.json')
       .then(d => d.json())
       .then(setFeedData)
       .catch(console.error);
