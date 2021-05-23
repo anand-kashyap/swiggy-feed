@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import RestaurantListContainer from './RestaurantListContainer';
 import Sidebar from './Sidebar';
 
 const FeedContainer = () => {
@@ -22,10 +23,9 @@ const FeedContainer = () => {
       <Sidebar categories={catArr} />
       <div className='section-container'>
         {catArr.map(({ category, restaurantList }) =>
-
           <section id={category} key={category}>
             <h2 className='cat-name'>{category}</h2>
-
+            <RestaurantListContainer list={restaurantList} />
           </section>
         )}
       </div>
