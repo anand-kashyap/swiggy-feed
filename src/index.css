@@ -21,6 +21,9 @@ body,
   padding: 10px;
 }
 
+header {
+  margin: 0 30px;
+}
 /* feed  */
 .feed-container {
   margin: 30px;
