@@ -12,7 +12,6 @@ const FeedContainer = () => {
       .catch(console.error);
   }, []);
 
-
   const setFeedData = (categories) => {
     console.log('setFeedData -> catArr', categories);
     const onlyOnSwiggy = [], allRestaurants = [];
@@ -38,10 +37,7 @@ const FeedContainer = () => {
       <Sidebar categories={catArr} />
       <div className='section-container'>
         {catArr.map(({ category, restaurantList }) =>
-          <section id={category} key={category}>
-            <h2 className='cat-name'>{category}</h2>
-            <RestaurantListContainer list={restaurantList} />
-          </section>
+          <RestaurantListContainer key={category} list={restaurantList} category={category} />
         )}
       </div>
     </main>

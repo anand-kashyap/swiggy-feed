@@ -30,7 +30,7 @@ header {
 }
 
 .section-container {
-  margin-left: 20%;
+  margin-left: 22%;
 }
 .section-container > section {
   border-bottom: 1px solid #a5a4a46b;
@@ -44,7 +44,7 @@ header {
 
 .sidebar {
   position: fixed;
-  width: 15%;
+  width: 18%;
   list-style-type: none;
   padding: 20px 0;
   border-color: #d3d5df;
@@ -85,6 +85,17 @@ header {
 }
 .res-card > p {
   margin-top: 5px;
+}
+
+.load-more > button {
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  border: 2px solid #e47322;
+  color: #e47322;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  font-weight: bold;
 }
 
 .res-card > .quick-view {
