@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { getImgUrl } from '../utils';
 import RestaurantListContainer from './RestaurantListContainer';
 import Sidebar from './Sidebar';
 
 const FeedContainer = () => {
-  const [catArr, setCatArr] = useState([]);
+  const sectionRefs = useRef([]);
+  const [catArr, setCatArr] = useState([]),
+    [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     fetch('https://cdn.adpushup.com/reactTask.json')
@@ -12,13 +15,40 @@ const FeedContainer = () => {
       .catch(console.error);
   }, []);
 
-
-  const imgIds = '1484723091739-30a097e8f929,1521305916504-4a1121188589,1511690743698-d9d85f2fbf38,1506084868230-bb9d95c24759,1429554513019-6c61c19ffb7e,1482049016688-2d3e1b311543,1496412705862-e0088f16f791,1432139509613-5c4255815697,1478145046317-39f10e56b5e9,1484980972926-edee96e0960d,1504544750208-dc0358e63f7f'.split(',');
-
-  const getImgUrl = () => {
-    const id = imgIds[Math.floor(Math.random() * imgIds.length)];
-    return `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=254&h=160&q=60`
+  const closestNumIndex = (needle, arr) => {
+    let min = Math.min();
+    let closestIndex = 0;
+    for (let i = 0; i < arr.length; i++) {
+      let absVal = Math.abs(needle - arr[i])
+      if (min > absVal) {
+        min = absVal;
+        closestIndex = i;
+      }
+    }
+    return closestIndex;
   }
+
+  const setActiveSection = () => {
+    const sectionOffsets = sectionRefs.current.map(s => s.offsetTop);
+    const index = closestNumIndex(window.scrollY, sectionOffsets);
+
+    setActiveIndex(index);
+
+    const section = sectionRefs.current[index];
+    console.log('near', section);
+  };
+
+  useEffect(() => {
+    const scroll = e => {
+      console.log(window.scrollY);
+      setActiveSection();
+    }
+    window.addEventListener('scroll', scroll);
+    return () => {
+      window.removeEventListener('scroll', scroll)
+    }
+  }, [sectionRefs]);
+
 
   const setFeedData = (categories) => {
     console.log('setFeedData -> catArr', categories);
@@ -42,12 +72,17 @@ const FeedContainer = () => {
     setCatArr(categories);
   };
 
+
   return (
-    <main className='feed-container'>
-      <Sidebar categories={catArr} />
-      <div className='section-container'>
-        {catArr.map(({ category, restaurantList }) =>
-          <RestaurantListContainer key={category} list={restaurantList} category={category} />
+    <main className='feed-container' >
+      <Sidebar categories={catArr} activeIndex={activeIndex} />
+      <div className='section-container' >
+        {catArr.map(({ category, restaurantList }, i) =>
+          <RestaurantListContainer ref={r => {
+            sectionRefs.current[i] = r;
+
+            return r;
+          }} key={category} list={restaurantList} category={category} />
         )}
       </div>
     </main>

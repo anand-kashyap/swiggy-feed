@@ -1,22 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-const Sidebar = ({ categories }) => {
-  const [active, setActive] = useState('');
-
-  useEffect(() => {
-    const [first] = categories;
-    first && setActive(first.category);
-  }, [categories]);
+const Sidebar = ({ categories, activeIndex }) => {
 
   const scrollToSection = (category) => {
-    setActive(category);
     document.getElementById(category).scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (
     <ul className='sidebar'>
-      {categories.map(({ category, restaurantList }) =>
-        <li key={category} onClick={() => scrollToSection(category)} className={active === category ? 'active' : ''}>
+      {categories.map(({ category, restaurantList }, i) =>
+        <li key={category} onClick={() => scrollToSection(category)} className={activeIndex === i ? 'active' : ''}>
           <p className='cat-name'>
             {category}
           </p>

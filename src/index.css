@@ -27,6 +27,7 @@ header {
 /* feed  */
 .feed-container {
   margin: 30px;
+  overflow: auto;
 }
 
 .section-container {

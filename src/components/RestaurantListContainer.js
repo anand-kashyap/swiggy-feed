@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 import Restaurant from './Restaurant';
 
-const RestaurantListContainer = ({ list, category }) => {
+const RestaurantListContainer = forwardRef(({ list, category }, ref) => {
   const showAll = category.endsWith('ALL') || list.length <= 6;
 
   const [tobeDisplayed, setTobeDisplayed] = useState(showAll ? list : list.slice(0, 5)),
@@ -19,7 +19,7 @@ const RestaurantListContainer = ({ list, category }) => {
   };
 
   return (
-    <section id={category}>
+    <section id={category} ref={ref}>
       <h2 className='cat-name'>{category}</h2>
       <div className='restaurant-list-container'>
         {tobeDisplayed.map((restaurant, index) =>
@@ -37,6 +37,6 @@ const RestaurantListContainer = ({ list, category }) => {
     </section>
 
   )
-}
+})
 
 export default RestaurantListContainer
