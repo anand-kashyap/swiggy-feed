@@ -8,7 +8,7 @@ const Sidebar = ({ categories }) => {
           <p className='cat-name'>
             {category}
           </p>
-          <p className='restaurant-num'>{restaurantList.length} options</p>
+          <p className='restaurant-num'>{restaurantList.length} {category.toLowerCase().endsWith('all') ? 'restaurants' : 'options'}</p>
         </li>
       )}
     </ul>

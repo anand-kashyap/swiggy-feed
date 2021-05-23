@@ -15,6 +15,21 @@ const FeedContainer = () => {
 
   const setFeedData = (categories) => {
     console.log('setFeedData -> catArr', categories);
+    const onlyOnSwiggy = [], allRestaurants = [];
+
+    categories.forEach(({ restaurantList }) => {
+      restaurantList.forEach(restaurant => {
+        allRestaurants.push(restaurant);
+        if (restaurant.isExlusive) {
+          onlyOnSwiggy.push(restaurant);
+        }
+      })
+    });
+
+    categories.push(
+      { category: 'only on swiggy', restaurantList: onlyOnSwiggy },
+      { category: 'SEE ALL', restaurantList: allRestaurants },
+    )
     setCatArr(categories);
   };
 
