@@ -2,9 +2,21 @@ import React, { useState } from 'react';
 import Restaurant from './Restaurant';
 
 const RestaurantListContainer = ({ list, category }) => {
-  const [tobeDisplayed, setTobeDisplayed] = useState(category.endsWith('ALL') ? list : list.slice(0, 5));
+  const showAll = category.endsWith('ALL') || list.length <= 6;
 
-  const remainingRestaurants = list.length - tobeDisplayed.length;
+  const [tobeDisplayed, setTobeDisplayed] = useState(showAll ? list : list.slice(0, 5)),
+    [remaining, setRemaining] = useState(list.length - tobeDisplayed.length);
+
+  const loadMore = () => {
+    if (remaining <= 6) {
+      setTobeDisplayed(list);
+      setRemaining(0);
+      return
+    }
+    const newArr = list.slice(0, tobeDisplayed.length + 6);
+    setTobeDisplayed(newArr);
+    setRemaining(remaining - 5);
+  };
 
   return (
     <section id={category}>
@@ -16,9 +28,9 @@ const RestaurantListContainer = ({ list, category }) => {
           </div>
         )}
         {/* load more button */}
-        {remainingRestaurants > 0 &&
+        {remaining > 0 &&
           <div className='load-more'>
-            <button>+{remainingRestaurants} More</button>
+            <button onClick={() => loadMore()}>+{remaining} More</button>
           </div>
         }
       </div>
