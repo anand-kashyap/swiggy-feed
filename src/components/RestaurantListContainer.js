@@ -15,7 +15,7 @@ const RestaurantListContainer = forwardRef(({ list, category }, ref) => {
     }
     const newArr = list.slice(0, tobeDisplayed.length + 6);
     setTobeDisplayed(newArr);
-    setRemaining(remaining - 5);
+    setRemaining((rem) => rem - 6);
   };
 
   return (
