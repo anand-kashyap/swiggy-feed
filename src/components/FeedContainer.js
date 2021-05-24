@@ -38,9 +38,20 @@ const FeedContainer = () => {
       // console.log('near', section);
     };
 
-    const scroll = e => {
-      setActiveSection();
+    const throttle = (fn, delay) => {
+      let flag = true;
+      return function (...args) {
+        if (flag) {
+          fn.apply(this, args);
+          flag = false;
+          setTimeout(() => {
+            flag = true
+          }, delay);
+        }
+      }
     };
+
+    const scroll = throttle(setActiveSection, 100);
 
     window.addEventListener('scroll', scroll);
     return () => {
